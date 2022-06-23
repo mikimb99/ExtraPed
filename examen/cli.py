@@ -1,7 +1,7 @@
 import socket, time,sys, select
 
 class Cliente:
-    #
+
     def mandar_msg(self,msg,socket):
         socket.send(msg.encode('utf8'))
 
@@ -9,26 +9,20 @@ class Cliente:
         if respuesta=="salir":
             print("Servidor desconectado :(")
             sys.exit(0)
-
-
         else:
             print(respuesta)
-
-
-
-
 
     def cli7(self):
        #TAL CUAL----
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)
         #puerto = int(input("Introduce el puerto del servidor: "))
-        puerto= 16023
+        puerto= 16023 #modificar el puerto
         s.connect(("localhost", puerto))
 
         lista_sockets = [s, sys.stdin]
 
         try:
-            while True: #si dice 3 mensajes solo, cambiar whhile tru por el for
+            while True: #si dice 3 mensajes solo, cambiar whhile true por el for
                 #-------
                 #si quieres hacer un print, es aqui
                 #print ("Dime linea o frase")

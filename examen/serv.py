@@ -7,7 +7,7 @@ class Servidor:
     #TAL CUAL--------
     def abrir_socket(self):
         if not self.port:
-            self.port= 16023
+            self.port= 16023 #poner el puerto que nos diga
         ruta="0.0.0.0"
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind((ruta, self.port))
@@ -21,7 +21,7 @@ class Servidor:
         socket.send(msg.encode('utf8'))
     #-----------
 
-    # ESTO IGUAL NO HHACE FALTA
+    # ESTO IGUAL NO HACE FALTA
     # obtener_accion(linea)
     #opcion=l
     #campo=inea
@@ -37,6 +37,21 @@ class Servidor:
 
     def hora(self):
         return time.strftime("%H:%M:%S")
+
+    def nlineas(self): #contar nº lineas de un archivo
+
+        lines = 0
+        size = 1024 * 1024
+        with open('archivo.txt', "r+") as myfile:
+            read_file = myfile.read
+            buffer = read_file(size)
+            while buffer:
+                lines += buffer.count('\n')
+                buffer = read_file(size)
+        if (lines != 0):
+            lines += 1
+        print(lines)
+
     #TAL CUAL-----
     def run_serv(self):
         self.socket = self.abrir_socket()
@@ -69,7 +84,8 @@ class Servidor:
                                 mensaje = self.hora()
                             elif data == "fecha":
                                 mensaje = time.strftime("%d/%m/%y")
-
+                            elif data== "lineas":
+                                mensaje = self.nlineas()
                             else:
                                 mensaje= "ERROR"
                             #if data=="sumar":
@@ -82,8 +98,6 @@ class Servidor:
                                self.mandar_msg(mensaje,sock)
                             else:
                                   pass
-
-
                         #TAL CUAL, GESTION DE EXCEPECIONES
                         except OSError as exc:
                             if exc.errno == 54:
@@ -102,16 +116,11 @@ class Servidor:
             except:
                 raise
 
-
-
     def __init__(self,port=None):
         self.port = port
         self.lista_sockets= []
         self.socket=None
         
-
-
-
 if __name__ == "__main__":
     a= Servidor()
     a.run_serv()
