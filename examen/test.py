@@ -22,3 +22,18 @@ class TestServidor(unittest.TestCase):
         a=2
         b=1
         self.assertEqual(a - b, 1)
+
+    def testarchivo(self): #pasa con las líneas
+        serv = Servidor()
+        lines = 0
+        size = 1024 * 1024
+        with open('archivo.txt', "r+") as myfile:
+            read_file = myfile.read
+            buffer = read_file(size)
+            while buffer:
+                lines += buffer.count('\n')
+                buffer = read_file(size)
+        if (lines != 0):
+            lines += 1
+        self.assertEqual(lines, 6)
+

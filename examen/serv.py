@@ -39,7 +39,6 @@ class Servidor:
         return time.strftime("%H:%M:%S")
 
     def nlineas(self): #contar nº lineas de un archivo
-
         lines = 0
         size = 1024 * 1024
         with open('archivo.txt', "r+") as myfile:
@@ -51,7 +50,20 @@ class Servidor:
         if (lines != 0):
             lines += 1
         print(lines)
-
+    def espalindroma(self): #introduces por pantalla una palabra y mira si es palíndroma
+        palabra = input("Introduce la palabra: ")
+        # Imprime en ese caso "Es palindroma"
+        if str(palabra) == str(palabra)[::-1]:
+            print("Es palindroma: ", palabra)
+        else:
+            print("No es palindroma: ", palabra)
+    def contarpalabras(self): #cuenta las palabras que hay en un archivo
+        with open("archivo.txt") as f:
+               contents = f.read()
+               print(contents)
+               palabras = contents.split() #split para convertirla en lista
+               num_palabras= len(palabras)
+               print("El archivo " + "archivo.txt" + " contiene: "+ str(num_palabras))
     #TAL CUAL-----
     def run_serv(self):
         self.socket = self.abrir_socket()
@@ -86,6 +98,10 @@ class Servidor:
                                 mensaje = time.strftime("%d/%m/%y")
                             elif data== "lineas":
                                 mensaje = self.nlineas()
+                            elif data== "palindroma":
+                                mensaje = self.espalindroma()
+                            elif data== "contar":
+                                mensaje = self.contarpalabras()
                             else:
                                 mensaje= "ERROR"
                             #if data=="sumar":
