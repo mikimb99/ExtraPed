@@ -2,10 +2,10 @@ import socket, time,sys, select
 
 class Cliente:
 
-    def mandar_msg(self,msg,socket):
+    def mandar_msg(self,msg,socket): #manda el msg
         socket.send(msg.encode('utf8'))
 
-    def tratamiento_respuesta(self, respuesta):
+    def tratamiento_respuesta(self, respuesta): #metodo para la respuesta
         if respuesta=="salir":
             print("Servidor desconectado :(")
             sys.exit(0)
@@ -22,7 +22,7 @@ class Cliente:
         lista_sockets = [s, sys.stdin]
 
         try:
-            while True: #si dice 3 mensajes solo, cambiar whhile true por el for
+            while True: #si dice 3 mensajes solo, cambiar while true por el for
                 #-------
                 #si quieres hacer un print, es aqui
                 #print ("Dime linea o frase")

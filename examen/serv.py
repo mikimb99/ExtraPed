@@ -32,9 +32,6 @@ class Servidor:
 
     #ejemplo de funcion
     #HACER AQUI LAS FUNCIONES
-    def sumar(self,a,b):
-        return a+b
-
     def hora(self):
         return time.strftime("%H:%M:%S")
 
@@ -104,17 +101,12 @@ class Servidor:
                                 mensaje = self.contarpalabras()
                             else:
                                 mensaje= "ERROR"
-                            #if data=="sumar":
-                            #mensaje= self.sumar(1,2)
-                            #elif data== "restar":
-                            #mensaje= self.rest
-
                             #MANDAR SOLUCION
                             if mensaje:
                                self.mandar_msg(mensaje,sock)
                             else:
                                   pass
-                        #TAL CUAL, GESTION DE EXCEPECIONES
+                        #TAL CUAL, GESTION DE EXCEPCIONES
                         except OSError as exc:
                             if exc.errno == 54:
                                 self.lista_sockets.remove(sock)

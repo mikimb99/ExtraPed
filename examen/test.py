@@ -1,6 +1,6 @@
 import unittest, time;
 from serv import Servidor
-
+#Realizarlo lo primero para testear las funciones, primero fallar luego OK
 class TestServidor(unittest.TestCase):
     def test1_hora(self):
         serv = Servidor()
